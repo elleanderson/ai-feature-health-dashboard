@@ -1,0 +1,16 @@
+@use 'tokens' as *;
+
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: $abyss;
+  color: $cream;
+  font-family: $sans;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+a { color: $gold-soft; text-decoration: none; &:hover { color: $cream; } }
+:focus-visible { outline: 2px solid $gold-soft; outline-offset: 3px; border-radius: 4px; }
+h1, h2 { font-family: $serif; font-weight: 500; margin: 0; }
+.dot { color: $gold-soft; }

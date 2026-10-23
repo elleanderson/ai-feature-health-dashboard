@@ -1,0 +1,32 @@
+// Brand tokens, shared with andersonco.uk
+$abyss: #0A1F1C;
+$pine: #12332E;
+$pine-line: #1E4A43;
+$panel: #0F2A26;
+$cream: #F3EEE2;
+$cream-dim: rgba(243, 238, 226, 0.66);
+$hairline: rgba(243, 238, 226, 0.12);
+$gold: #A8842F;
+$gold-soft: #CFB36A;
+$sage: #7FA89A;
+$rust: #C7795F;
+
+$serif: 'Fraunces', Georgia, serif;
+$sans: 'IBM Plex Sans', system-ui, sans-serif;
+$mono: 'IBM Plex Mono', ui-monospace, monospace;
+
+$gold-gradient: linear-gradient(135deg, #E9D9A6 0%, $gold-soft 45%, $gold 100%);
+
+$bp-tablet: 1024px;
+$bp-phone: 640px;
+
+@mixin label {
+  font-family: $mono;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+@mixin below($bp) {
+  @media (max-width: $bp) { @content; }
+}

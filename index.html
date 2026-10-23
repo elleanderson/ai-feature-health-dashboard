@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Feature Health Dashboard. Elle Anderson</title>
+  <meta name="description" content="A product leader's dashboard for a live AI feature: cost per conversation, response time, eval pass rate, hallucination rate, drift and human review. Built by Elle Anderson.">
+  <link rel="icon" type="image/png" href="./leaf-oak.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <script type="module" src="/src/main.ts"></script>
+</head>
+<body>
+  <div class="app">
+    <aside class="side" aria-label="Sections">
+      <a class="brand" href="https://andersonco.uk"><img src="./leaf-oak.png" alt=""><span>Feature Health</span></a>
+      <nav>
+        <a href="#overview" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 13h8V3H3zm10 8h8V11h-8zM3 21h8v-6H3zm10-18v6h8V3z"/></svg><span>Overview</span></a>
+        <a href="#spend"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Spend</span></a>
+        <a href="#quality"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 12l2 2 4-4M12 2l8 4v6c0 5-3.5 9-8 10-4.5-1-8-5-8-10V6z" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Quality</span></a>
+        <a href="#drift"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8M15 7h6v6" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Drift</span></a>
+        <a href="#review"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8m14 10v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8" fill="none" stroke="currentColor" stroke-width="2"/></svg><span>Review</span></a>
+      </nav>
+    </aside>
+
+    <main class="main">
+      <header class="top" id="overview">
+        <div>
+          <p class="eyebrow">New Leaf Coach &middot; Live AI Feature</p>
+          <h1>Feature Health<span class="dot">.</span></h1>
+          <p class="lede">Is the AI feature affordable, fast, good and safe? One page that answers all four, written for the people who have to decide.</p>
+        </div>
+        <div class="controls">
+          <div class="seg" role="group" aria-label="Date range">
+            <button data-range="7">7 Days</button>
+            <button data-range="30" aria-pressed="true">30 Days</button>
+            <button data-range="90">90 Days</button>
+          </div>
+          <div class="seg" role="group" aria-label="Model strategy">
+            <button data-strategy="single">One Large Model</button>
+            <button data-strategy="routed" aria-pressed="true">Routed</button>
+          </div>
+        </div>
+      </header>
+
+      <div class="alert" id="alert" role="status">
+        <span class="alert-k">Drift Alert</span>
+        <p id="alert-text">Questions about redundancy are rising.</p>
+        <button class="alert-x" id="alert-x" aria-label="Dismiss alert">&times;</button>
+      </div>
+
+      <p class="sample">Sample data for demonstration. The numbers are generated to behave like a real coaching feature, so every panel has a story to tell.</p>
+
+      <section class="kpis" id="kpis" aria-label="Key measures"></section>
+
+      <section class="grid">
+        <article class="panel wide" id="spend">
+          <header><h2>Usage and Spend</h2><p class="panel-sub" id="spend-sub"></p></header>
+          <div class="chart tall"><canvas id="c-usage" aria-label="Daily conversations and daily spend" role="img"></canvas></div>
+          <p class="note"><b>What This Tells You.</b> <span id="spend-note"></span></p>
+        </article>
+
+        <article class="panel">
+          <header><h2>Model Mix</h2><p class="panel-sub">Where each conversation is sent</p></header>
+          <div class="chart"><canvas id="c-mix" aria-label="Share of conversations by model" role="img"></canvas></div>
+          <p class="note"><b>What This Tells You.</b> <span id="mix-note"></span></p>
+        </article>
+
+        <article class="panel" id="quality">
+          <header><h2>Eval Pass Rate</h2><p class="panel-sub">Share of test cases passed, target 80%</p></header>
+          <div class="chart"><canvas id="c-evals" aria-label="Eval pass rate over time" role="img"></canvas></div>
+          <p class="note"><b>What This Tells You.</b> The dip lines up with a prompt edit. The evals flagged it on the first day, before any customer complained, and the rate recovered as soon as the change was rolled back.</p>
+        </article>
+
+        <article class="panel">
+          <header><h2>Hallucination Rate</h2><p class="panel-sub">Sampled replies with an invented claim, limit 2%</p></header>
+          <div class="chart"><canvas id="c-hall" aria-label="Hallucination rate over time" role="img"></canvas></div>
+          <p class="note"><b>What This Tells You.</b> One average hides who pays. Check where the errors land, because a few wrong answers for vulnerable users matter more than many harmless ones.</p>
+        </article>
+
+        <article class="panel">
+          <header><h2>Response Time</h2><p class="panel-sub">Median and slowest 5%, target under 6 seconds</p></header>
+          <div class="chart"><canvas id="c-latency" aria-label="Response time over time" role="img"></canvas></div>
+          <p class="note"><b>What This Tells You.</b> Customers feel the slow tail, not the average. Watch the slowest 5% and stream replies so the wait feels shorter.</p>
+        </article>
+
+        <article class="panel wide" id="drift">
+          <header><h2>What People Ask About</h2><p class="panel-sub">First week of the period against the latest week</p></header>
+          <div class="chart"><canvas id="c-drift" aria-label="Topic share, first week against latest week" role="img"></canvas></div>
+          <p class="note"><b>What This Tells You.</b> <span id="drift-note"></span></p>
+        </article>
+
+        <article class="panel wide" id="review">
+          <header><h2>Human Review Queue</h2><p class="panel-sub" id="review-sub"></p></header>
+          <div class="table-wrap">
+            <table class="queue">
+              <thead><tr><th>Flagged</th><th>Topic</th><th>Reason</th><th>Status</th></tr></thead>
+              <tbody id="queue"></tbody>
+            </table>
+          </div>
+          <p class="note"><b>What This Tells You.</b> A person checks anything the system is unsure about. If the queue grows faster than the team can clear it, that's a staffing decision as much as a technical one.</p>
+        </article>
+      </section>
+
+      <footer class="foot">
+        <p>Designed and built by <a href="https://andersonco.uk">Elle Anderson</a>. TypeScript, SCSS, Chart.js and Vite. <a href="https://github.com/elleanderson/ai-feature-health-dashboard">Source on GitHub</a> &middot; <a href="https://andersonco.uk/ai-glossary">AI Glossary for Product Leaders</a></p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

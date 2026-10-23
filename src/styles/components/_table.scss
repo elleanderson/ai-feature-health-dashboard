@@ -1,0 +1,10 @@
+@use '../tokens' as *;
+
+.table-wrap { overflow-x: auto; }
+.queue {
+  width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px;
+  th { @include label; font-size: 10px; color: $cream-dim; text-align: left; padding: 8px 10px; border-bottom: 1px solid $hairline; font-weight: 400; }
+  td { padding: 11px 10px; border-bottom: 1px solid $hairline; }
+  tr:last-child td { border-bottom: 0; }
+  .pill { @include label; font-size: 9.5px; border: 1px solid rgba(207, 179, 106, 0.5); color: $gold-soft; border-radius: 999px; padding: 3px 8px; white-space: nowrap; }
+}

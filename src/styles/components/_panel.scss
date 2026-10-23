@@ -1,0 +1,13 @@
+@use '../tokens' as *;
+
+.panel {
+  background: $panel; border: 1px solid $hairline; border-radius: 16px; padding: 20px 20px 16px;
+  display: flex; flex-direction: column; min-width: 0; scroll-margin-top: 70px;
+  h2 { font-size: 22px; }
+  .panel-sub { margin: 4px 0 14px; color: $cream-dim; font-size: 13.5px; }
+  .chart { position: relative; height: 230px; &.tall { height: 290px; } }
+  .note {
+    margin: 14px 0 0; padding-top: 12px; border-top: 1px solid $hairline; font-size: 13.5px; color: $cream-dim;
+    b { color: $gold-soft; font-weight: 500; font-family: $serif; font-style: italic; }
+  }
+}

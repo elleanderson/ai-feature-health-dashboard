@@ -1,0 +1,61 @@
+@use 'tokens' as *;
+
+.app { display: grid; grid-template-columns: 220px minmax(0, 1fr); min-height: 100vh; }
+
+.side {
+  position: sticky; top: 0; height: 100vh;
+  background: $pine; border-right: 1px solid $hairline;
+  padding: 26px 18px;
+  .brand {
+    display: flex; align-items: center; gap: 10px; color: $cream;
+    font-family: $serif; font-size: 18px; margin-bottom: 34px;
+    img { width: 26px; }
+  }
+  nav { display: flex; flex-direction: column; gap: 4px; }
+  nav a {
+    display: flex; align-items: center; gap: 12px;
+    padding: 10px 12px; border-radius: 10px; color: $cream-dim; font-size: 14.5px;
+    svg { width: 18px; height: 18px; fill: currentColor; flex: none; }
+    &:hover { color: $cream; background: rgba(243, 238, 226, 0.05); }
+    &.on { color: $abyss; background: $gold-gradient; }
+  }
+}
+
+.main { padding: 34px clamp(18px, 3vw, 44px) 40px; min-width: 0; }
+
+.top {
+  display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: 22px;
+  margin-bottom: 22px; scroll-margin-top: 20px;
+  .eyebrow { @include label; color: $gold-soft; margin: 0 0 10px; }
+  h1 { font-size: clamp(34px, 4.4vw, 52px); line-height: 1.05; }
+  .lede { color: $cream-dim; max-width: 56ch; margin: 10px 0 0; }
+}
+
+.sample { @include label; font-size: 10.5px; color: $cream-dim; margin: 0 0 18px; letter-spacing: 0.08em; text-transform: none; }
+
+.grid {
+  display: grid; gap: 18px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  .wide { grid-column: span 2; }
+  #drift, #review { grid-column: 1 / -1; }
+}
+
+.foot { margin-top: 34px; padding-top: 18px; border-top: 1px solid $hairline; color: $cream-dim; font-size: 13.5px; }
+
+@include below($bp-tablet) {
+  .app { grid-template-columns: 72px minmax(0, 1fr); }
+  .side { padding: 22px 10px; .brand span, nav a span { display: none; } .brand { justify-content: center; } nav a { justify-content: center; } }
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); .wide { grid-column: 1 / -1; } }
+}
+
+@include below($bp-phone) {
+  .app { grid-template-columns: 1fr; }
+  .side {
+    position: sticky; top: 0; z-index: 10; height: auto; padding: 8px 12px;
+    display: flex; align-items: center; justify-content: space-between; border-right: 0; border-bottom: 1px solid $hairline;
+    .brand { margin: 0; }
+    nav { flex-direction: row; gap: 2px; }
+    nav a { padding: 8px; }
+  }
+  .grid { grid-template-columns: 1fr; }
+}

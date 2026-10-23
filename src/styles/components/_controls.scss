@@ -1,0 +1,12 @@
+@use '../tokens' as *;
+
+.controls { display: flex; flex-wrap: wrap; gap: 10px; }
+.seg {
+  display: inline-flex; border: 1px solid $hairline; border-radius: 999px; padding: 3px; background: rgba(243, 238, 226, 0.03);
+  button {
+    @include label; font-size: 10.5px;
+    border: 0; background: none; color: $cream-dim; padding: 8px 13px; border-radius: 999px; cursor: pointer;
+    &:hover { color: $cream; }
+    &[aria-pressed='true'] { background: $gold-gradient; color: $abyss; font-weight: 600; }
+  }
+}
